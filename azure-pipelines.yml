@@ -9,17 +9,16 @@ steps:
   inputs:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
-- script: npm cache clean --force
-  displayName: 'Clear npm cache'
 
 - script: |
+    cd api  # Change to the directory where package.json is located
     npm install
     npm run build
   displayName: 'npm install and build'
 
 - task: CopyFiles@2
   inputs:
-    SourceFolder: 'api'  # Adjust this to the correct path in your repository
+    SourceFolder: 'api'
     Contents: '**'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
   displayName: 'Copy files to artifact staging directory'
