@@ -17,7 +17,7 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    SourceFolder: 'api/src'  # Adjust this to the correct path in your repository
+    SourceFolder: 'api'  # Adjust this to the correct path in your repository
     Contents: '**'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
   displayName: 'Copy files to artifact staging directory'
