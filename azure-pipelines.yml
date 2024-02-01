@@ -14,7 +14,9 @@ steps:
     cd api  # Change to the directory where package.json is located
     npm install
     npm run build
-  displayName: 'npm install and build'
+    npx prisma generate  # Run Prisma Client generation
+    npx prisma migrate dev  # Run Prisma migrations in development mode
+  displayName: 'npm install, build, Prisma generate, and migrate'
 
 - task: CopyFiles@2
   inputs:
