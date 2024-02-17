@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: ${{ env.FRONTEND_IMAGE_NAME }}:${{ env.FRONTEND_IMAGE_TAG }}
+          image: ikram2398/webapp-frontend:V1
           ports:
             - containerPort: 80
           imagePullPolicy: Always
