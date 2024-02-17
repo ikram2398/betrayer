@@ -1,8 +1,10 @@
 name: AKS pipeline
+
 on:
   push:
     branches:
       - main
+
 jobs:
   Build-Deploy to AKS:
     runs-on: ubuntu-latest
@@ -17,6 +19,7 @@ jobs:
     steps:
       - name: Git checkout
         uses: actions/checkout@v4
+
       - name: Build Frontend image
         run: |
           docker built -t $DOCKER_REPOSITORY/FRONTEND_IMAGE_NAME:FRONTEND_IMAGE_TAG ./webapp/Dockerfile ./webapp/
@@ -31,16 +34,18 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
         
-      - name: push to the docker registry
+      - name: Push to the Docker registry
         run: |
           docker push $DOCKER_REPOSITORY/FRONTEND_IMAGE_NAME:FRONT_IMAGE_TAG
           docker push $DOCKER_REPOSITORY/BACKEND_IMAGE_NAME:BACKEND_IMAGE_TAG  
-          - name: Gets K8s context
+
+      - name: Gets K8s context
         uses: azure/aks-set-context@94ccc775c1997a3fcfbfbce3c459fec87e0ab188
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
           resource-group: ${{ env.RESOURCE_GROUP }}
           cluster-name: ${{ env.CLUSTER_NAME }}
+
       - name: Apply deployment
         run: |
           envsubst < deployment.yaml | kubectl apply -f -
