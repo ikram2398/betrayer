@@ -2,7 +2,7 @@ name: AKS pipeline
 on:
   workflow_dispatch:
     branches:
-      - Pipeline
+      - main
 jobs:
   Build-Deploy to AKS:
     runs-on: ubuntu-latest
