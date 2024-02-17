@@ -30,6 +30,11 @@ jobs:
           cd webapp
           npm run build
 
+      - name: Debug
+        run: |
+          ls ${{ github.workspace }}
+          ls ${{ github.workspace }}/webapp/dist
+
       - name: Archive build artifacts
         uses: actions/upload-artifact@v2
         with:
