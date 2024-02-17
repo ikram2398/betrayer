@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  Build-Deploy to AKS:
+  build_deploy_to_AKS:
     runs-on: ubuntu-latest
     env:
       DOCKER_REPOSITORY: ${{ secrets.DOCKERHUB_USERNAME }}
@@ -38,7 +38,7 @@ jobs:
         run: |
           docker push $DOCKER_REPOSITORY/FRONTEND_IMAGE_NAME:FRONT_IMAGE_TAG
           docker push $DOCKER_REPOSITORY/BACKEND_IMAGE_NAME:BACKEND_IMAGE_TAG  
-
+      
       - name: Gets K8s context
         uses: azure/aks-set-context@94ccc775c1997a3fcfbfbce3c459fec87e0ab188
         with:
@@ -49,7 +49,7 @@ jobs:
       - name: Apply deployment
         run: |
           envsubst < deployment.yaml | kubectl apply -f -
-
+      
       - name: Apply service
         run: |
           envsubst < service.yaml | kubectl apply -f -
