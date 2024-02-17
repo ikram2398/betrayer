@@ -49,10 +49,8 @@ jobs:
           resource-group: ${{ env.RESOURCE_GROUP }}
           cluster-name: ${{ env.CLUSTER_NAME }}
 
-      - name: Apply deployment
+      - name: Apply deployment and service
         run: |
-          envsubst < $GITHUB_WORKSPACE/Deployment.yaml | kubectl apply -f -
+         kubectl apply -f $GITHUB_WORKSPACE/Deployment.yaml
+         kubectl apply -f $GITHUB_WORKSPACE/service.yaml
 
-      - name: Apply service
-        run: |
-          envsubst < $GITHUB_WORKSPACE/service.yaml | kubectl apply -f -
