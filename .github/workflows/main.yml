@@ -39,7 +39,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: build-artifacts
-          path: dist # Update path to dist directory
+          path: webapp/dist # Update path to dist directory
 
   deploy:
     needs: build
