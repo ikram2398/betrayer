@@ -1,6 +1,6 @@
 name: AKS pipeline
 on:
-  workflow-dispatch:
+  workflow_dispatch:
     branches:
       - main
 jobs:
